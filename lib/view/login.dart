@@ -28,8 +28,8 @@ class _LoginState extends State<Login> {
               child: Center(
                 child: SvgPicture.network(
                   'https://non14.net/assets/main/images/non14.svg',
-                  width: 100,
-                  height: 100,
+                  width: 80,
+                  height: 80,
                 ),
               ),
             ),
@@ -39,10 +39,10 @@ class _LoginState extends State<Login> {
               child: TextField(
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: 'الاميل',
+                    labelText: 'البريد الالكتروني',
                     labelStyle: GoogleFonts.almarai(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                    hintText: 'اكتب الاميل مثل abc@gmail.com'),
+                        fontSize: 15, fontWeight: FontWeight.bold),
+                    hintText: 'اكتب البريد مثل abc@gmail.com'),
               ),
             ),
             Padding(
@@ -55,8 +55,8 @@ class _LoginState extends State<Login> {
                     border: const OutlineInputBorder(),
                     labelText: 'الرقم السري',
                     labelStyle: GoogleFonts.almarai(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                    hintText: 'ادخل الرقم السر هنا'),
+                        fontSize: 15, fontWeight: FontWeight.bold),
+                    hintText: 'ادخل الرقم السري هنا'),
               ),
             ),
             ElevatedButton(
@@ -79,7 +79,7 @@ class _LoginState extends State<Login> {
                   //     context, MaterialPageRoute(builder: (_) => HomePage()));
                 },
                 child: const Text(
-                  'Login',
+                  'تسجيل الدخول',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
@@ -87,7 +87,8 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 130,
             ),
-            const Text('New User? Create Account')
+            const Text(' ليس لديك حساب ؟'),
+            const Text('انشاء حساب')
           ],
         ),
       ),

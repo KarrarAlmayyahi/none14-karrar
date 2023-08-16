@@ -73,7 +73,8 @@ class _HomepageState extends State<Homepage> {
   }
 
   static const String _imageUrl =
-      'http://pic.imamhussain.org/photos/hd/1323-6741690969478.jpg';
+      'https://non14.net/images/large/8-1692194437.jpg';
+  // 'https://pic.imamhussain.org/photos/hd/1323-6741690969478.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -125,9 +126,9 @@ class _HomepageState extends State<Homepage> {
           height: 46,
         ),
         actions: [
-          Text('تسجيل الدخول',
-              style: GoogleFonts.almarai(
-                  fontSize: 14, fontWeight: FontWeight.bold)),
+          // Text('تسجيل الدخول',
+          //     style: GoogleFonts.almarai(
+          //         fontSize: 14, fontWeight: FontWeight.bold)),
           IconButton(
               onPressed: () {
                 Get.to(() => const Login());
@@ -215,8 +216,8 @@ class _HomepageState extends State<Homepage> {
       //Drawer
       drawer: Drawer(
         child: ListView(children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
+          DrawerHeader(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(_imageUrl),
                 fit: BoxFit.cover,
@@ -229,7 +230,8 @@ class _HomepageState extends State<Homepage> {
                   right: 4.0,
                   child: Text(
                     "وكالة نون الخبرية",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style:
+                        GoogleFonts.almarai(fontSize: 18, color: Colors.white),
                   ),
                 )
               ],
@@ -239,9 +241,15 @@ class _HomepageState extends State<Homepage> {
           for (var i = 0; i < cat.length; i++)
             ListTile(
               leading: CircleAvatar(
-                child: Image.network(cat[i].icon.toString()),
+                child: Image.network(
+                  cat[i].icon.toString(),
+                  width: 22,
+                  height: 22,
+                  color: Colors.white,
+                ),
               ),
-              title: Text(cat[i].name.toString()),
+              title: Text(cat[i].name.toString(),
+                  style: GoogleFonts.almarai(fontSize: 16)),
               onTap: () {
                 Get.to(() => Postcat(
                       category: cat[i],
