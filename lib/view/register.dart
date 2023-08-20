@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_3/view/register.dart';
+import 'package:flutter_application_3/view/login.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "تسجيل الدخول",
+          "انشاء حساب جديد",
           style: GoogleFonts.almarai(fontSize: 23, fontWeight: FontWeight.bold),
         ),
       ),
@@ -49,13 +49,27 @@ class _LoginState extends State<Login> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 20),
+                  left: 15.0, right: 15.0, top: 15, bottom: 15),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 obscureText: true,
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     labelText: 'الرقم السري',
+                    labelStyle: GoogleFonts.almarai(
+                        fontSize: 15, fontWeight: FontWeight.bold),
+                    hintText: 'ادخل الرقم السري هنا'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 15.0, right: 15.0, top: 0, bottom: 20),
+              //padding: EdgeInsets.symmetric(horizontal: 15),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelText: 'تاكيد الرقم السري',
                     labelStyle: GoogleFonts.almarai(
                         fontSize: 15, fontWeight: FontWeight.bold),
                     hintText: 'ادخل الرقم السري هنا'),
@@ -89,12 +103,9 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 130,
             ),
-            Text(' ليس لديك حساب ؟',
-                style: GoogleFonts.almarai(
-                    fontSize: 13, fontWeight: FontWeight.bold)),
             TextButton(
-                onPressed: () => Get.to(const Register()),
-                child: Text('انشاء حساب جديد',
+                onPressed: () => Get.to(const Login()),
+                child: Text('تسجيل الدخول',
                     style: GoogleFonts.almarai(
                         fontSize: 17, fontWeight: FontWeight.bold)))
           ],
