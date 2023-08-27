@@ -41,6 +41,7 @@ class _RegisterState extends State<Register> {
               child: TextField(
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
+                    prefixIcon: const Icon(Icons.email_outlined),
                     labelText: 'البريد الالكتروني',
                     labelStyle: GoogleFonts.almarai(
                         fontSize: 15, fontWeight: FontWeight.bold),
@@ -56,6 +57,7 @@ class _RegisterState extends State<Register> {
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     labelText: 'الرقم السري',
+                    prefixIcon: const Icon(Icons.password_outlined),
                     labelStyle: GoogleFonts.almarai(
                         fontSize: 15, fontWeight: FontWeight.bold),
                     hintText: 'ادخل الرقم السري هنا'),
@@ -70,6 +72,7 @@ class _RegisterState extends State<Register> {
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     labelText: 'تاكيد الرقم السري',
+                    prefixIcon: const Icon(Icons.password),
                     labelStyle: GoogleFonts.almarai(
                         fontSize: 15, fontWeight: FontWeight.bold),
                     hintText: 'ادخل الرقم السري هنا'),
