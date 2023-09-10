@@ -116,6 +116,7 @@ class _LoginState extends State<Login> {
                       context: context);
         
                   //userinfo details
+                  //
                   // ignore: avoid_print
                   print(user);
                   if (user != null) {
