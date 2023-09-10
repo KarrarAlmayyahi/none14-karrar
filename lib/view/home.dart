@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_3/model/posts.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -71,6 +73,23 @@ class _HomepageState extends State<Homepage> {
       });
     }
   }
+  void _signOut(BuildContext context) async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('تم تسجيل الخروج بنجاح'))
+    );
+  } catch (e) {
+    // ignore: use_build_context_synchronously
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('يوجد خطا في تسجيل الخروج: $e')),
+    );
+  }
+}
+
+
+
 
   static const String _imageUrl =
       'https://non14.net/images/large/8-1692194437.jpg';
@@ -133,7 +152,9 @@ class _HomepageState extends State<Homepage> {
               onPressed: () {
                 Get.to(() => const Login());
               },
-              icon: const Icon(Icons.person))
+              icon: const Icon(Icons.person)),
+              IconButton(onPressed: (){_signOut(context);}, icon: const Icon(Icons.close))
+
         ],
       ),
       body: Visibility(

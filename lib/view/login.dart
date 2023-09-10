@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_3/view/home.dart';
 import 'package:flutter_application_3/view/profile.dart';
 import 'package:flutter_application_3/view/register.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,11 +24,16 @@ class _LoginState extends State<Login> {
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
       user = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == "user not found") {
-        // ignore: avoid_print
-        print('didnot fint user');
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Sign-in failed: $e')),
+        );
       }
     }
     return user;
@@ -108,6 +114,8 @@ class _LoginState extends State<Login> {
                       email: emailControl.text,
                       password: passwordControl.text,
                       context: context);
+        
+                  //userinfo details
                   // ignore: avoid_print
                   print(user);
                   if (user != null) {
@@ -115,7 +123,15 @@ class _LoginState extends State<Login> {
                     Navigator.pushReplacement(
                         context,
                         (MaterialPageRoute(
-                            builder: (context) => const ProfileUser())));
+                            builder: (context) =>  ProfileUser(userdata: user.email.toString(),))));
+                  } else {
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content: Text('لديك خطا في الاميل او الباسوورد',
+                              style: GoogleFonts.almarai(
+                                  fontSize: 16, fontWeight: FontWeight.bold))),
+                    );
                   }
                 },
                 child: const Text(
@@ -133,6 +149,12 @@ class _LoginState extends State<Login> {
             TextButton(
                 onPressed: () => Get.to(const Register()),
                 child: Text('انشاء حساب جديد',
+                    style: GoogleFonts.almarai(
+                        fontSize: 17, fontWeight: FontWeight.bold))),
+         const SizedBox(height: 100,),
+            TextButton(
+                onPressed: () => Get.to(const Homepage()),
+                child: Text('تخطي',
                     style: GoogleFonts.almarai(
                         fontSize: 17, fontWeight: FontWeight.bold)))
           ],
