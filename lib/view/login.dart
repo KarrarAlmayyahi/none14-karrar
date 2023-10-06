@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_3/view/home.dart';
@@ -6,12 +8,24 @@ import 'package:flutter_application_3/view/register.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
-
   @override
   State<Login> createState() => _LoginState();
+}
+
+@override
+void saveToken(String token) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('access_token', token);
+}
+
+void getToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('access_token');
+  print('Access Token: $token');
 }
 
 class _LoginState extends State<Login> {
@@ -20,14 +34,30 @@ class _LoginState extends State<Login> {
       required String password,
       required BuildContext context}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
+
+    User? user = auth.currentUser;
+
+    ///get acess token///
+    if (user != null) {
+      String? token = await user.getIdToken();
+      //dow save access token//
+      saveToken(token.toString());
+      //display access token fron shared prefrence//
+      getToken();
+
+      print('Access Token is this ........: $token');
+    } else {
+      print('The user is currently signed in.');
+    }
+    User? user2;
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
+
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
-      user = userCredential.user;
+      user2 = userCredential.user;
     } on FirebaseAuthException catch (e) {
       if (e.code == "user not found") {
         // ignore: use_build_context_synchronously
@@ -36,7 +66,7 @@ class _LoginState extends State<Login> {
         );
       }
     }
-    return user;
+    return user2;
   }
 
   @override
@@ -94,14 +124,6 @@ class _LoginState extends State<Login> {
                     hintText: 'ادخل الرقم السري هنا'),
               ),
             ),
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   child: Text(
-            //     'هل نسيت الررقم السري ؟',
-            //     style: GoogleFonts.almarai(
-            //         fontSize: 16, fontWeight: FontWeight.bold),
-            //   ),
-            // ),
             Container(
               margin: const EdgeInsets.only(top: 10),
               height: 50,
@@ -114,17 +136,18 @@ class _LoginState extends State<Login> {
                       email: emailControl.text,
                       password: passwordControl.text,
                       context: context);
-        
                   //userinfo details
                   //
-                  // ignore: avoid_print
+                  // ignore:
                   print(user);
                   if (user != null) {
                     // ignore: use_build_context_synchronously
                     Navigator.pushReplacement(
                         context,
                         (MaterialPageRoute(
-                            builder: (context) =>  ProfileUser(userdata: user.email.toString(),))));
+                            builder: (context) => ProfileUser(
+                                  userdata: user.email.toString(),
+                                ))));
                   } else {
                     // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -152,7 +175,9 @@ class _LoginState extends State<Login> {
                 child: Text('انشاء حساب جديد',
                     style: GoogleFonts.almarai(
                         fontSize: 17, fontWeight: FontWeight.bold))),
-         const SizedBox(height: 100,),
+            const SizedBox(
+              height: 100,
+            ),
             TextButton(
                 onPressed: () => Get.to(const Homepage()),
                 child: Text('تخطي',

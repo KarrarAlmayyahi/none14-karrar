@@ -8,7 +8,7 @@ import 'package:get/route_manager.dart';
 
 class ProfileUser extends StatefulWidget {
   final String userdata ;
-    ProfileUser({super.key,required this.userdata});
+    const ProfileUser({super.key,required this.userdata});
 
   @override
   State<ProfileUser> createState() => _ProfileUserState();
