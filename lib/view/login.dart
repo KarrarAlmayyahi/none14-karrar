@@ -16,7 +16,6 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-@override
 void saveToken(String token) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('access_token', token);
@@ -37,15 +36,15 @@ class _LoginState extends State<Login> {
 
     User? user = auth.currentUser;
 
-    ///get acess token///
+ 
     if (user != null) {
       String? token = await user.getIdToken();
-      //dow save access token//
+
       saveToken(token.toString());
-      //display access token fron shared prefrence//
+  
       getToken();
 
-      //print acess token//
+    
       print('Access Token is this ........: $token');
     } else {
       print('The user is currently signed in.');
@@ -55,6 +54,7 @@ class _LoginState extends State<Login> {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
 
+ 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('تم تسجيل الدخول بنجاح')));
@@ -147,7 +147,8 @@ class _LoginState extends State<Login> {
                         context,
                         (MaterialPageRoute(
                             builder: (context) => ProfileUser(
-                                  userdata: user.email.toString(),
+                                  userEmail: user.email.toString(),
+                                  userName: user.displayName.toString(),
                                 ))));
                   } else {
                     // ignore: use_build_context_synchronously

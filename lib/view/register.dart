@@ -6,6 +6,7 @@ import 'package:flutter_application_3/view/profile.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 void _createUserProfile(String userId, String email) {
   FirebaseFirestore.instance.collection('users').doc(userId).set({
     'email': email,
@@ -21,9 +22,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  
-
-    static Future<User?> createUserWithEmailAndPassword(
+  static Future<User?> createUserWithEmailAndPassword(
       {required String email,
       required String password,
       required BuildContext context}) async {
@@ -39,10 +38,10 @@ class _RegisterState extends State<Register> {
         // ignore: avoid_print
         print('didnot fint user');
       }
-      
     }
     return user;
   }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController emailControl = TextEditingController();
@@ -114,16 +113,14 @@ class _RegisterState extends State<Register> {
             //   ),
             // ),
 
-
-
-          //   ElevatedButton(
-          // onPressed: (){},
-          //     child: Text(
-          //       'هل نسيت الررقم السري ؟',
-          //       style: GoogleFonts.almarai(
-          //           fontSize: 16, fontWeight: FontWeight.bold),
-          //     ),
-          //   ),
+            //   ElevatedButton(
+            // onPressed: (){},
+            //     child: Text(
+            //       'هل نسيت الررقم السري ؟',
+            //       style: GoogleFonts.almarai(
+            //           fontSize: 16, fontWeight: FontWeight.bold),
+            //     ),
+            //   ),
             Container(
               margin: const EdgeInsets.only(top: 10),
               height: 50,
@@ -131,7 +128,7 @@ class _RegisterState extends State<Register> {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: ElevatedButton(
-                   onPressed: () async {
+                onPressed: () async {
                   User? user = await createUserWithEmailAndPassword(
                       email: emailControl.text,
                       password: passwordControl.text,
@@ -143,10 +140,11 @@ class _RegisterState extends State<Register> {
                     Navigator.pushReplacement(
                         context,
                         (MaterialPageRoute(
-                            builder: (context) =>  ProfileUser(userdata: user.email.toString(),))
-                            ));
+                            builder: (context) => ProfileUser(
+                                  userEmail: user.email.toString(),
+                                  userName: user.displayName.toString(),
+                                ))));
                   }
-                
                 },
                 child: const Text(
                   'انشاء الحساب',
