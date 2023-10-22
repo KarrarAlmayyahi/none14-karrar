@@ -1,17 +1,8 @@
-import 'dart:html';
-import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_3/view/home.dart';
-import 'package:flutter_application_3/view/login.dart';
-import 'package:get/get_connect/http/src/_http/_stub/_file_decoder_stub.dart';
-import 'package:get/route_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
-import 'package:path/path.dart' as Path;
 
 class ProfileUser extends StatefulWidget {
   final String userEmail;
@@ -89,7 +80,7 @@ class _ProfileUserState extends State<ProfileUser> {
 //               : Container(),
 
             _imageData == null
-                ? Text('No image selected.')
+                ? const Text('No image selected.')
                 : CircleAvatar(
                     child: CircleAvatar(
                       radius: 50,
