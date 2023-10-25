@@ -43,7 +43,7 @@ dependencies:
   intl: any
   search_page: ^2.3.0
   flutter_html: ^3.0.0-beta.2
-  parse_server_sdk_flutter: ^6.0.0
+  parse_server_sdk_flutter: ^7.0.0
   flutter_parse: ^1.0.1
   google_fonts: ^4.0.4
   firebase_auth: ^4.7.3
@@ -64,7 +64,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
